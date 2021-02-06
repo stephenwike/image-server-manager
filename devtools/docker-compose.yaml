@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  image-server:
+    image: stephenwike/image-server:latest
+    ports:
+    - "11223:80"
+    volumes:
+    - ./data:/data
+          
