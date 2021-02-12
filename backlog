@@ -1,0 +1,5 @@
+FEATURES
+
+- Make a deployment chart.
+- Make an api endpoint that moves approved images to images directory.
+- Make a frontend that displays unapproved images and allows one click approval.

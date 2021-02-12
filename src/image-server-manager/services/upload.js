@@ -1,23 +1,24 @@
 const multer = require("multer");
+const fs = require("fs");
+const utf8 = require("utf8");
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(
-            (error) => console.log(error),
-            'tmp/unapproved');
+        var root = process.env.ROOT_IMAGES_FOLDER || "/images";
+        var folder = `${root}/unapproved/${req.params.folder}`;
+        if (!fs.existsSync(folder)){
+            fs.mkdirSync(folder, { recursive: true });
+        }
+        cb(null, folder);
     },
     filename: (req, file, cb) => {
-        cb(
-            (error) => console.log(error),
-            file.filename + '-' + Date.now());
+        cb(null, utf8.encode(file.originalname));
     }
 })
 
 const fileFilter = (req, file, cb) => {
     if (file.mimetype === "image/png" || file.mimetype === "image/jpg" || file.mimetype === "image/jpeg") {
-        cb (
-            (error) => console.log(error),
-            true);
+        cb (null, true);
     }
     else {
         cb (
