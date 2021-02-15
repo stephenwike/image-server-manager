@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}
+data:
+  PORT: "80"
+  ROOT_IMAGE_FOLDER: "/images"
